@@ -159,21 +159,8 @@ class MapViewModel(): ViewModel() {
     }
 
     fun scrollTo(location: Location){
-        val x = normalizeLongitude(location.longitude)
-        val y = normalizeLatitude(location.latitude)
-
-        val zoomLvl = scaleToZoom(state.scale)
-
-        val maxWidth = 2.0.pow(19) - 1
-
         val tilePos = getXYTile(location.latitude, location.longitude, 19)
-        state
 
-        viewModelScope.launch {
-            state.scrollTo(x, y)
-            AddMarker(x, y)
-            state.rotateTo(0f, TweenSpec(2000, easing = FastOutSlowInEasing))
-        }
     }
 
     fun getXYTile(lat : Double, lon: Double, zoom : Int) : Pair<Int, Int> {
@@ -253,7 +240,7 @@ class MapViewModel(): ViewModel() {
 
     private val mapSize = 268435456
     val state: MapState by mutableStateOf(
-        MapState(20, mapSize, mapSize, workerCount = Runtime.getRuntime().availableProcessors()/2).apply {
+        MapState(20, mapSize, mapSize, workerCount = Runtime.getRuntime().availableProcessors()).apply {
             addLayer(tileStreamProvider)
             enableRotation()
             scale = 0.0001f

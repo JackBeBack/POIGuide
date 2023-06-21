@@ -64,6 +64,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:1.6.3")
     implementation("androidx.activity:activity-compose:1.3.0")
     implementation("com.google.accompanist:accompanist-permissions:0.31.3-beta")
+    implementation("com.google.android.material:material:1.8.0")
     implementation(libs.play.services.location)
 
 
